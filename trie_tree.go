@@ -1,5 +1,7 @@
 package sensitive
 
+import "strings"
+
 // Trie 短语组成的Trie树.
 type Trie struct {
 	Root *Node
@@ -28,6 +30,10 @@ func (tree *Trie) Add(words ...string) {
 }
 
 func (tree *Trie) add(word string) {
+	word = strings.Trim(word, "\r\n")
+	if len(word) == 0 {
+		return
+	}
 	var current = tree.Root
 	var runes = []rune(word)
 	for position := 0; position < len(runes); position++ {
